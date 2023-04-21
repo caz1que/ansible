@@ -11,37 +11,17 @@
       when:
         ansible_distribution in ['Debian']
 
+- hosts: all
+  become: true
+  roles:
+  - base
+
 - hosts: web_servers
   become: true
-  tasks:
-
-    - name: Install apache2
-      tags: web
-      apt:
-        name:
-        - apache2
-        state: latest
-      when:
-        ansible_distribution in ['Debian']
-
-    - name: Copying site file
-      tags: web
-      copy:
-        src: ./default_site.html
-        dest: /var/www/html/index.html
-        mode: 0644
-        owner: root
-        group: root
+  roles:
+  - web_servers
 
 - hosts: db_servers
   become: true
-  tasks:
-
-    - name: Install default-mysql-server
-      tags: db
-      apt:
-        name:
-          - default-mysql-server
-        state: latest
-      when:
-        ansible_distribution in ['Debian', 'Ubuntu']
+  roles:
+  - db_servers

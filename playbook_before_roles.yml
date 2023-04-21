@@ -1,0 +1,47 @@
+---
+
+- hosts: all
+  become: true
+  pre_tasks:
+
+    - name: Update repositories
+      tags: always
+      apt:
+        update_cache: true
+      when:
+        ansible_distribution in ['Debian']
+
+- hosts: web_servers
+  become: true
+  tasks:
+
+    - name: Install apache2
+      tags: web
+      apt:
+        name:
+        - apache2
+        state: latest
+      when:
+        ansible_distribution in ['Debian']
+
+    - name: Copying site file
+      tags: web
+      copy:
+        src: ./default_site.html
+        dest: /var/www/html/index.html
+        mode: 0644
+        owner: root
+        group: root
+
+- hosts: db_servers
+  become: true
+  tasks:
+
+    - name: Install default-mysql-server
+      tags: db
+      apt:
+        name:
+          - default-mysql-server
+        state: latest
+      when:
+        ansible_distribution in ['Debian', 'Ubuntu']

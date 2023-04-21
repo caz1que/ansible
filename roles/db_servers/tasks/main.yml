@@ -1,0 +1,6 @@
+- name: Install default-mysql-server
+  tags: db
+  apt:
+   name: default-mysql-server
+   state: latest
+  when: ansible_distribution == 'Debian'
