@@ -10,4 +10,6 @@
   copy:
     src: ../files/default_site.html
     dest: /var/www/html/index.html
+    owner: www-data
+    group: www-data
   when: ansible_distribution == 'Debian'
