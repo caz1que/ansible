@@ -11,8 +11,6 @@
       when:
         ansible_distribution in ['Debian']
 
-- hosts: all
-  become: true
   roles:
   - base
 
@@ -25,3 +23,8 @@
   become: true
   roles:
   - db_servers
+
+- hosts: docker_servers
+  become: true
+  roles:
+  - docker_servers

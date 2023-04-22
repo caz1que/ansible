@@ -1,0 +1,5 @@
+- name: Add docker repo
+  import_tasks: repo_docker.yml
+
+- name: Install docker packages
+  import_tasks: install_docker.yml

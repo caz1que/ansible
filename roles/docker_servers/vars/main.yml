@@ -1,0 +1,4 @@
+keyrings_dir: /etc/apt/keyrings
+docker_url: https://download.docker.com/linux/debian
+arch: 'dpkg --print-architecture'
+

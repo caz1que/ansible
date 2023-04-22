@@ -1,14 +1,11 @@
 - name: Debug message
-  tags: always
   debug:
     msg: A date on node is {{ ansible_date_time.date }}
 
 - name: Checking uptime
-  tags: always
   shell: /usr/bin/uptime
   register: uptime_result
 
 - name: Debug uptime
-  tags: always
   debug:
-    var: uptime_result
+    msg: '{{uptime_result.stdout}}'
